@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class interactablePlant : MonoBehaviour
+public class interactableFence : MonoBehaviour
 {
-   
+
     [SerializeField] private float distance;
     [SerializeField] private LayerMask target;
     [SerializeField] private GameObject UI_obj;
@@ -34,11 +34,14 @@ public class interactablePlant : MonoBehaviour
 
             //Interact with the item 
 
-            if (Input.GetKeyUp(KeyCode.E) && this.GetComponent<plantStatus>().getGrowingTime() <= 0)
+            if (Input.GetKeyUp(KeyCode.E))
             {
-                //gather the plant
-                player.GetComponent<playerStatus>().updateHunger(this.GetComponent<plantStatus>().getNutritiveValue());
-                Destroy(gameObject);
+                //upgrade fence
+                if(player.GetComponent<playerStatus>().getWood() >= this.GetComponent<fenceStatus>().getNbPlanksToUpgrade() && this.GetComponent<fenceStatus>().getNbPlanksToUpgrade() != -1)
+                {
+                    player.GetComponent<playerStatus>().updateWood(-this.GetComponent<fenceStatus>().getNbPlanksToUpgrade());
+                    this.GetComponent<fenceStatus>().updateCurrentLevel();
+                }
             }
 
         }
