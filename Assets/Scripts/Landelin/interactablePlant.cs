@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class interactableLog : MonoBehaviour
+public class interactablePlant : MonoBehaviour
 {
+    // Start is called before the first frame update
     // Start is called before the first frame update
     [SerializeField] private float distance;
     [SerializeField] private LayerMask target;
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject UI_obj; 
+    [SerializeField] private GameObject UI_obj;
+
+    private GameObject player;
     void Start()
     {
         UI_obj.SetActive(false);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -32,9 +35,11 @@ public class interactableLog : MonoBehaviour
 
             //Interact with the item 
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E) && this.GetComponent<plantStatus>().getGrowingTime() <= 0)
             {
-                player.GetComponent<playerStatus>().updateWood(1);
+                //gather the plant
+                player.GetComponent<playerStatus>().updateHunger(this.GetComponent<plantStatus>().getNutritiveValue());
+                Destroy(gameObject);
             }
 
         }
