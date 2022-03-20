@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         bool IsWalking = m_animator.GetBool("IsWalking");
 
         // horizontal
+        /*
         if(x == 1)
         {
             // up
@@ -91,6 +92,10 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.localRotation = Quaternion.Euler(0f, rotation, 0f);
+        */
+
+        Vector3 moveForward = transform.forward * z;
+        Vector3 moveSides = transform.right * x;
 
         if (Physics.Raycast(transform.position, Vector3.down))
         {
