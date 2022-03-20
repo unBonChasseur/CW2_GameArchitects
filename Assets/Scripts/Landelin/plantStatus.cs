@@ -6,7 +6,9 @@ public class plantStatus : MonoBehaviour
 {
     [SerializeField] private float nutritiveValue; 
     [SerializeField] private float growingTime;
-    private float currentTime; 
+    private float currentTime;
+
+    private bool isTargeted; 
     void Start()
     {
         StartCoroutine(countDown(growingTime * 60)); 
@@ -36,5 +38,15 @@ public class plantStatus : MonoBehaviour
     public float getCurrentTime()
     {
         return currentTime;
+    }
+
+    public bool getisTargeted()
+    {
+        return isTargeted; 
+    }
+
+    public void updateisTargeted(bool state)
+    {
+        isTargeted = state; 
     }
 }
