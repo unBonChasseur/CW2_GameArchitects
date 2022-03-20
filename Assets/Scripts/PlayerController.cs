@@ -97,7 +97,6 @@ public class PlayerController : MonoBehaviour
             //Create fences
             if (Input.GetKeyDown(KeyCode.U))
             {
-
                 GameObject fence = Instantiate(Fence[(int)(rotation / 90)]);
                 fence.transform.position = new Vector3(fence.transform.position.x + (int)transform.position.x, .95f, fence.transform.position.z + (int)transform.position.z+1);
             }
