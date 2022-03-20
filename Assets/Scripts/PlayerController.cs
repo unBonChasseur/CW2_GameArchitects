@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [Header("Animations")]
     private Animator m_animator;
     private int m_walkingHash;
+    private int m_walkingXHash;
+    private int m_walkingZHash;
 
     [Header("Movement")]
     [SerializeField]
@@ -33,7 +35,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         m_animator = GetComponent<Animator>();
-        m_walkingHash = Animator.StringToHash("IsWalking");
+        m_walkingXHash = Animator.StringToHash("IsWalking");
+        m_walkingXHash = Animator.StringToHash("WalkingX");
+        m_walkingZHash = Animator.StringToHash("WalkingZ");
     }
 
     // Update is called once per frame
@@ -48,47 +52,14 @@ public class PlayerController : MonoBehaviour
         x = Input.GetAxis("Horizontal");
 
         bool IsWalking = m_animator.GetBool("IsWalking");
+        float IsWalkingZ = m_animator.GetFloat("WalkingX");
+        float IsWalkingX = m_animator.GetFloat("WalkingZ");
 
-        // horizontal
-        if(x == 1)
+        if (x != 0 && z != 0)
         {
-            // up
-            if(z == 1)
-                rotation = 45f;
-
-            // down
-            else if (z == -1)
-                rotation = 135f;
-            
-            // only
-            else if(z == 0)
-                rotation = 90f;
+            x /= 1.5f;
+            z /= 1.5f;
         }
-        else if (x == -1)
-        {
-            // up
-            if (z == 1)
-                rotation = 315f;
-
-            // down
-            else if (z == -1)
-                rotation = 225f;
-
-            // only
-            else if (z == 0)
-                rotation = 270f;
-        }
-        else
-        {
-            if (z == -1)
-                rotation = 180f;
-
-            else if (z == 1)
-                rotation = 0f;
-
-        }
-
-        transform.localRotation = Quaternion.Euler(0f, rotation, 0f);
 
         if (Physics.Raycast(transform.position, Vector3.down))
         {
@@ -117,13 +88,16 @@ public class PlayerController : MonoBehaviour
         }
 
         // Used to move the gameObject by using direction (not X and Z axis)
-        if(z != 0 || x != 0)
-        {
-            m_animator.SetBool(m_walkingHash, true);
-            m_controller.Move(transform.forward * m_speed * Time.deltaTime);
-        }
+        m_animator.SetFloat(m_walkingXHash, x);
+        m_animator.SetFloat(m_walkingZHash, z);
+
+        if (z > 0 || Mathf.Abs(x) > 0)
+            m_animator.SetBool("IsWalking", true);
         else
-            m_animator.SetBool(m_walkingHash, false);
+            m_animator.SetBool("IsWalking", false);
+
+        Vector3 move = transform.right * x + transform.forward * z;
+        m_controller.Move(move * m_speed * Time.deltaTime);
 
     }
 }
