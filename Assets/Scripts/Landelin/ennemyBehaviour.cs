@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ennemyBehaviour : MonoBehaviour
 {
-    private ennemyStatus status;
-    private GameObject[] plants;
-    private int rand; 
+    private ennemyStatus status; 
 
     private void Start()
     {
@@ -15,6 +13,8 @@ public class ennemyBehaviour : MonoBehaviour
 
     private void Update()
     {
-        
+        //Compute path to target 
+        //if ennemy arrived -> destroy target 
     }
+
 }
