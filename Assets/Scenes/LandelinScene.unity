@@ -2511,7 +2511,7 @@ MonoBehaviour:
   DirectionalLight: {fileID: 705507994}
   Preset: {fileID: 11400000, guid: 891907b300224ab4aa2e8a9600c944aa, type: 2}
   TimeOfDay: 6
-  dayDuration: 6
+  dayDuration: 6.1
 --- !u!1 &2146995277
 GameObject:
   m_ObjectHideFlags: 0

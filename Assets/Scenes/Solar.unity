@@ -267,7 +267,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5 years later, humans are bitten by its species and turn into zombies
+  m_Text: '5 years later, the first human is bitten by a new species and turn into
+    something the world has never seen before... '
 --- !u!222 &83222990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -743,8 +744,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Zombies are attacking farmers' crops and food is becoming increasingly
-    scarce. Many humans are taking up farming to provide for their needs
+  m_Text: 'Zombies are attacking farmers'' crops and food is becoming increasingly
+    scarce. Many humans are taking up farming to provide for their needs.
+
+
+    You
+    are one of them.'
 --- !u!222 &1086341727
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1072,8 +1077,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: In the year 2025, the earth is a victim of the sun's explosion due to global
-    warming
+  m_Text: In the year 2025, the earth is victim of the sun's explosion due to global
+    warming.
 --- !u!222 &1739540703
 CanvasRenderer:
   m_ObjectHideFlags: 0
