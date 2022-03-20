@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1826209211482991542}
   - component: {fileID: 1833937771741774890}
   - component: {fileID: 1855937558699141678}
+  - component: {fileID: 2131911530}
   m_Layer: 0
   m_Name: Carrot_Fruit
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810815720804374700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.231198, y: 1.0100002, z: 4.871088}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.5, y: 1.0100002, z: 0.5}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,3 +97,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300022, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
+--- !u!114 &2131911530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810815720804374700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritiveValue: 1
+  growingTime: 5

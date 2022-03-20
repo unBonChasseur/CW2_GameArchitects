@@ -86,8 +86,6 @@ public class PlayerController : MonoBehaviour
             else if (z == 1)
                 rotation = 0f;
 
-            else if (rotation % 90 != 0)
-                rotation -= 45f;
         }
 
         transform.localRotation = Quaternion.Euler(0f, rotation, 0f);
@@ -103,7 +101,8 @@ public class PlayerController : MonoBehaviour
             //create gates
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Debug.Log("I");
+                GameObject gate = Instantiate(Fence[(int)(rotation / 90)]);
+                gate.transform.position = new Vector3(gate.transform.position.x + (int)transform.position.x, .95f, gate.transform.position.z + (int)transform.position.z + 1);
             }
             //ramone le sol
             if (Input.GetKeyDown(KeyCode.O))
