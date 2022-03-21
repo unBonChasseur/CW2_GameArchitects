@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6815095876001262192}
   - component: {fileID: 7582880906017760725}
   - component: {fileID: 5683324253132755231}
+  - component: {fileID: -1023572066761676599}
   m_Layer: 0
   m_Name: craftingtable
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-1023572066761676599
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187881273545502922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2654393, y: 0.5782797, z: 0.24038096}
+  m_Center: {x: -0.014676433, y: 0.0022763275, z: 0.11768548}
