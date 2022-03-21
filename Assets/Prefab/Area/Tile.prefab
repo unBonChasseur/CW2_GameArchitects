@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4731649585967228584}
   - component: {fileID: 8480907326482436935}
   - component: {fileID: 528496070333675524}
+  - component: {fileID: 1601030165}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -313,6 +314,40 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1601030165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385225950939025482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef8fc1b3b70daf4f998e55bedde40bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fenceExists: 00000000
+  m_Fence:
+  - {fileID: 2180076954487708735, guid: 1f4a29d38c1631049a5bb52b05684b0f, type: 3}
+  - {fileID: 8390663429256435636, guid: 33b8f27b9861c5947b0c4f71cfd820f4, type: 3}
+  - {fileID: 5214277721135419287, guid: d4b8502e41f1533489f385c5fb203e93, type: 3}
+  - {fileID: 8503982132146976071, guid: 0af11a92d2575a945ac90776f74c9e7e, type: 3}
+  - {fileID: 4438387064779404887, guid: 4a6c6605e5a850541a996ef442025e0b, type: 3}
+  - {fileID: 2309281859634777317, guid: e27254f8c0e3907469b7fa0ff4fc4541, type: 3}
+  - {fileID: 3435689102579121808, guid: f845ecffbd59273468845dedc08f6e10, type: 3}
+  - {fileID: 3727864128496653330, guid: 2338900817c03714089de3a922396ddc, type: 3}
+  m_InstantiateUp: {fileID: 0}
+  m_InstantiateRight: {fileID: 0}
+  m_InstantiateDown: {fileID: 0}
+  m_InstantiateLeft: {fileID: 0}
+  m_Plant:
+  - {fileID: 2665502638981219914, guid: 7c72126076946e04ca6c2c825aaa07f6, type: 3}
+  - {fileID: 2700812954317585656, guid: 93ed95033ccaf4c4fa5e057cab55db5d, type: 3}
+  - {fileID: 4047251353979125790, guid: 5712e1ec222bd734ba695887a005834a, type: 3}
+  m_instantiatePlant: {fileID: 0}
+  m_hasPlant: 0
+  GrassMaterial: {fileID: 2100000, guid: 2d00bbe95245ad2458a174408203db42, type: 2}
+  DirtMaterial: {fileID: 2100000, guid: 4c58c051b8b3a1a4ca9b2982a52735cb, type: 2}
 --- !u!1 &6719564704543716658
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +371,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6719564704543716658}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

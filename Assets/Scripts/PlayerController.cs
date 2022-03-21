@@ -19,17 +19,14 @@ public class PlayerController : MonoBehaviour
     private CharacterController m_controller;
     [SerializeField]
     private Transform m_playerTransform;
-    private float rotation = 0f;
+    public bool m_isWorking = false;
 
     [Header("Ground")]
     private RaycastHit hit;
 
-    [Header("interactables")]
-    [SerializeField]
-    private GameObject[] Fence;
-    [SerializeField]
-    private GameObject[] Gate;
 
+    public GameObject m_marteau;
+    public GameObject m_outil;
 
     // Start is called before the first frame update
     void Start()
@@ -61,43 +58,95 @@ public class PlayerController : MonoBehaviour
             z /= 1.5f;
         }
 
-        if (Physics.Raycast(transform.position, Vector3.down))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit) && !m_isWorking)
         {
+
+            GameObject hitObject = hit.transform.gameObject;
+
             //Create fences
-            if (Input.GetKeyDown(KeyCode.U))
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                GameObject fence = Instantiate(Fence[(int)(rotation / 90)]);
-                fence.transform.position = new Vector3(fence.transform.position.x + (int)transform.position.x, .95f, fence.transform.position.z + (int)transform.position.z+1);
+                int angle = 0;
+
+                angle += (int)(m_playerTransform.rotation.eulerAngles.y / 90);
+
+                if (m_playerTransform.rotation.eulerAngles.y % 90 > 45 && angle < 3)
+                    angle += 1;
+
+                StartCoroutine(InteractAnimation(2));
+
+                hitObject.GetComponent<TileStatus>().InteractFence(angle, false);
+                
             }
-            //create gates
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                GameObject gate = Instantiate(Fence[(int)(rotation / 90)]);
-                gate.transform.position = new Vector3(gate.transform.position.x + (int)transform.position.x, .95f, gate.transform.position.z + (int)transform.position.z + 1);
-            }
+
             //ramone le sol
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                Debug.Log("O");
-            }
-            //plante un truc
             if (Input.GetKeyDown(KeyCode.P))
             {
-                Debug.Log("P");
+                hitObject.GetComponent<TileStatus>().InteractGround(true, 0);
+                StartCoroutine(InteractAnimation(0));
             }
+
         }
 
         // Used to move the gameObject by using direction (not X and Z axis)
         m_animator.SetFloat(m_walkingXHash, x);
         m_animator.SetFloat(m_walkingZHash, z);
 
-        if (z > 0 || Mathf.Abs(x) > 0)
-            m_animator.SetBool("IsWalking", true);
+        
+
+        if (!m_isWorking)
+        {
+            if (z > 0 || Mathf.Abs(x) > 0)
+                m_animator.SetBool("IsWalking", true);
+            else
+                m_animator.SetBool("IsWalking", false);
+
+            Vector3 move = transform.right * x + transform.forward * z;
+            m_controller.Move(move * m_speed * Time.deltaTime);
+        }
         else
             m_animator.SetBool("IsWalking", false);
 
-        Vector3 move = transform.right * x + transform.forward * z;
-        m_controller.Move(move * m_speed * Time.deltaTime);
+    }
 
+    IEnumerator InteractAnimation(int x)
+    {
+        m_isWorking = true;
+        switch (x)
+        {
+            case 0:
+                m_animator.SetBool("Planter", true);
+                m_outil.SetActive(true);
+                break;
+            case 1:
+                m_animator.SetBool("Recolter", true);
+                break;
+            case 2:
+                m_animator.SetBool("Construire", true);
+                m_marteau.SetActive(true);
+                break;
+
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        m_isWorking = false;
+        switch (x)
+        {
+            case 0:
+                m_animator.SetBool("Planter", false);
+                m_outil.SetActive(false);
+                break;
+
+            case 1:
+                m_animator.SetBool("Recolter", false);
+                break;
+
+            case 2:
+                m_animator.SetBool("Construire", false);
+                m_marteau.SetActive(false);
+                break;
+
+        }
     }
 }

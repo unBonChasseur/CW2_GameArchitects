@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3435689102579540656}
   - component: {fileID: 3435689102578246288}
   - component: {fileID: 3435689102577115216}
+  - component: {fileID: 2457743890081587711}
   m_Layer: 0
   m_Name: Down Fence Gate
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2457743890081587711
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0012655943, y: 0.0095810825, z: 0.008258369}
+  m_Center: {x: -0.00044241073, y: 0.0052381954, z: -0.0040557226}
