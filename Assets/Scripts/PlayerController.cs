@@ -7,31 +7,27 @@ public class PlayerController : MonoBehaviour
 
     //Hashes useful for animations
     [Header("Animations")]
-    private Animator m_animator;
+    [SerializeField] private Animator m_animator;
     private int m_walkingHash;
     private int m_walkingXHash;
     private int m_walkingZHash;
 
     [Header("Movement")]
-    [SerializeField]
-    private float m_speed;
-    [SerializeField]
-    private CharacterController m_controller;
-    [SerializeField]
-    private Transform m_playerTransform;
-    public bool m_isWorking = false;
+    [SerializeField] private float m_speed;
+    [SerializeField] private CharacterController m_controller;
+    [SerializeField] private Transform m_playerTransform;
+    private bool m_isWorking = false;
 
     [Header("Ground")]
-    private RaycastHit hit;
+    private RaycastHit m_hit;
 
-
-    public GameObject m_marteau;
-    public GameObject m_outil;
+    [Header("Tools")]
+    [SerializeField] private GameObject m_hammer;
+    [SerializeField] private GameObject m_plow;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_animator = GetComponent<Animator>();
         m_walkingXHash = Animator.StringToHash("IsWalking");
         m_walkingXHash = Animator.StringToHash("WalkingX");
         m_walkingZHash = Animator.StringToHash("WalkingZ");
@@ -58,41 +54,8 @@ public class PlayerController : MonoBehaviour
             z /= 1.5f;
         }
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit) && !m_isWorking)
-        {
-
-            GameObject hitObject = hit.transform.gameObject;
-
-            //Create fences
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                int angle = 0;
-
-                angle += (int)(m_playerTransform.rotation.eulerAngles.y / 90);
-
-                if (m_playerTransform.rotation.eulerAngles.y % 90 > 45 && angle < 3)
-                    angle += 1;
-
-                StartCoroutine(InteractAnimation(2));
-
-                hitObject.GetComponent<TileStatus>().InteractFence(angle, false);
-                
-            }
-
-            //ramone le sol
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                hitObject.GetComponent<TileStatus>().InteractGround(true, 0);
-                StartCoroutine(InteractAnimation(0));
-            }
-
-        }
-
-        // Used to move the gameObject by using direction (not X and Z axis)
         m_animator.SetFloat(m_walkingXHash, x);
         m_animator.SetFloat(m_walkingZHash, z);
-
-        
 
         if (!m_isWorking)
         {
@@ -107,46 +70,131 @@ public class PlayerController : MonoBehaviour
         else
             m_animator.SetBool("IsWalking", false);
 
+
+        //////////////////////
+        ///   INTERACTIONS ///
+        //////////////////////
+
+        if (Physics.Raycast(transform.position, Vector3.down, out m_hit) && !m_isWorking)
+        {
+            GameObject hitObject = m_hit.transform.gameObject;
+
+            // Create fences
+            if (Input.GetKeyDown(KeyCode.F))
+                build(false, hitObject);
+
+            // Create gates
+            if (Input.GetKeyDown(KeyCode.G))
+                build(true, hitObject);
+
+            // Spade the ground // Plant 
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+                plant(0, hitObject);
+
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+                plant(1, hitObject);
+
+            if (Input.GetKeyDown(KeyCode.Keypad3))
+                plant(2, hitObject);
+
+            // Harvest plants
+            if (Input.GetKeyDown(KeyCode.E))
+                harvest(hitObject);
+        }
     }
 
-    IEnumerator InteractAnimation(int x)
+    /// <summary>
+    /// Build / update
+    /// </summary>
+    /// <param name="isGate"></param>
+    /// <param name="hitObject"></param>
+    private void build(bool isGate, GameObject hitObject)
+    {
+        int angle = (int)(m_playerTransform.rotation.eulerAngles.y / 90);
+        if (m_playerTransform.rotation.eulerAngles.y % 90 > 45)
+            angle = (angle + 1) % 4;
+
+        angle = isGate ? angle + 4 : angle;
+
+        if(hitObject.GetComponent<TileStatus>().CreateFence(angle))
+            StartCoroutine(InteractAnimation(2));
+
+        else
+        {
+            int nbPlanksUpdate = hitObject.GetComponent<TileStatus>().UpdateFence(angle, GetComponent<playerStatus>().getWood());
+            if(nbPlanksUpdate != 0)
+            {
+                GetComponent<playerStatus>().updateWood(-nbPlanksUpdate);
+                StartCoroutine(InteractAnimation(2));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Spade / Plant
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="hitObject"></param>
+    private void plant(int i, GameObject hitObject)
+    {
+        if (hitObject.GetComponent<TileStatus>().Spade())
+            StartCoroutine(InteractAnimation(0));
+        else if (hitObject.GetComponent<TileStatus>().PlantGround(i))
+            StartCoroutine(InteractAnimation(1));
+    }
+
+    /// <summary>
+    /// Harvest / Water
+    /// </summary>
+    /// <param name="hitObject"></param>
+    private void harvest(GameObject hitObject)
+    {
+        float nutritiveValue = hitObject.GetComponent<TileStatus>().Harvest();
+        if (nutritiveValue != 0)
+        {
+            StartCoroutine(InteractAnimation(1));
+            GetComponent<playerStatus>().updateHunger(nutritiveValue);
+        }
+        else if(GetComponent<playerStatus>().getWater() > 0)
+        {
+            StartCoroutine(InteractAnimation(1));
+            if(hitObject.GetComponent<TileStatus>().WaterPlants())
+                GetComponent<playerStatus>().decreaseWater(1);
+        }
+    }
+
+    private IEnumerator InteractAnimation(int AnimationNumber)
     {
         m_isWorking = true;
-        switch (x)
-        {
-            case 0:
-                m_animator.SetBool("Planter", true);
-                m_outil.SetActive(true);
-                break;
-            case 1:
-                m_animator.SetBool("Recolter", true);
-                break;
-            case 2:
-                m_animator.SetBool("Construire", true);
-                m_marteau.SetActive(true);
-                break;
-
-        }
+        animationChangeStatus(AnimationNumber);
 
         yield return new WaitForSeconds(3f);
 
         m_isWorking = false;
+        animationChangeStatus(AnimationNumber);
+    }
+
+    private void animationChangeStatus(int x)
+    {
         switch (x)
         {
             case 0:
-                m_animator.SetBool("Planter", false);
-                m_outil.SetActive(false);
+                m_animator.SetBool("Labourer", m_isWorking);
+                m_plow.SetActive(m_isWorking);
                 break;
 
             case 1:
-                m_animator.SetBool("Recolter", false);
+                m_animator.SetBool("Recolter", m_isWorking);
                 break;
 
             case 2:
-                m_animator.SetBool("Construire", false);
-                m_marteau.SetActive(false);
+                m_animator.SetBool("Construire", m_isWorking);
+                m_hammer.SetActive(m_isWorking);
                 break;
 
+            case 3:
+
+                break;
         }
     }
 }

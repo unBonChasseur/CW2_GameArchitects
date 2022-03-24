@@ -32,15 +32,6 @@ public class interactablePlant : MonoBehaviour
             UI_obj.SetActive(true);
             UI_obj.transform.rotation = Quaternion.Euler(90.0f, player.transform.rotation.eulerAngles.y, player.transform.rotation.eulerAngles.z);
 
-            //Interact with the item 
-
-            if (Input.GetKeyUp(KeyCode.E) && this.GetComponent<plantStatus>().getGrowingTime() <= 0)
-            {
-                //gather the plant
-                player.GetComponent<playerStatus>().updateHunger(this.GetComponent<plantStatus>().getNutritiveValue());
-                Destroy(gameObject);
-            }
-
         }
         else
         {
