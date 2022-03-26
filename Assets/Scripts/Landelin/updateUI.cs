@@ -9,10 +9,13 @@ public class updateUI : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject player;
     private playerStatus status;
+    [SerializeField] private GameObject time_obj;
+    private LightingManager dayManager; 
 
     [SerializeField] private Text wood;
     [SerializeField] private Slider hunger;
     [SerializeField] private Slider water;
+    [SerializeField] private Text time;
 
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject deathUI;
@@ -22,6 +25,7 @@ public class updateUI : MonoBehaviour
     void Start()
     {
         status = player.GetComponent<playerStatus>();
+        dayManager = time_obj.GetComponent<LightingManager>();
         paused = false; 
         inGameUI.SetActive(true);
         deathUI.SetActive(false);
@@ -43,6 +47,7 @@ public class updateUI : MonoBehaviour
         wood.text = status.getWood().ToString();
         hunger.value = status.getHunger();
         water.value = status.getWater();
+        time.text = Mathf.FloorToInt(dayManager.getTimeOfDay()).ToString();
     }
 
     private void playerDeathUI()
