@@ -146,7 +146,7 @@ public class TileStatus : MonoBehaviour
 
     public void DestroyFence(int nbFence)
     {
-        switch (nbFence)
+        switch (nbFence%4)
         {
             case 0:
                 if(m_instantiateUp)
@@ -214,7 +214,7 @@ public class TileStatus : MonoBehaviour
                 break;
 
             case 3:
-                if (!m_gateOpened[nbFence % 4] && nbFence >= 4 && m_isGate[nbFence % 4])
+                if (m_instantiateLeft && nbFence >= 4 && m_isGate[nbFence % 4])
                 {
                     if (!m_gateOpened[nbFence % 4])
                         m_instantiateLeft.transform.rotation = m_fence[(nbFence + 3) % 4].transform.rotation;
