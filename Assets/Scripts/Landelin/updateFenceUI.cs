@@ -17,8 +17,6 @@ public class updateFenceUI : MonoBehaviour
         status = this.GetComponent<fenceStatus>();
         s_currentHP.maxValue = status.getLevelMaxHP();
         s_currentHP.value = status.getCurrentHP();
-
-
     }
 
     private void Update()

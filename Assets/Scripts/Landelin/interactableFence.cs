@@ -32,18 +32,6 @@ public class interactableFence : MonoBehaviour
             UI_obj.SetActive(true);
             UI_obj.transform.rotation = Quaternion.Euler(90.0f, player.transform.rotation.eulerAngles.y, player.transform.rotation.eulerAngles.z);
 
-            //Interact with the item 
-
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                //upgrade fence
-                if(player.GetComponent<playerStatus>().getWood() >= this.GetComponent<fenceStatus>().getNbPlanksToUpgrade() && this.GetComponent<fenceStatus>().getNbPlanksToUpgrade() != -1)
-                {
-                    player.GetComponent<playerStatus>().updateWood(-this.GetComponent<fenceStatus>().getNbPlanksToUpgrade());
-                    this.GetComponent<fenceStatus>().updateCurrentLevel();
-                }
-            }
-
         }
         else
         {

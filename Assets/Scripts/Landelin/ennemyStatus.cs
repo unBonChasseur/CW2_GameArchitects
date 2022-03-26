@@ -9,7 +9,7 @@ public class ennemyStatus : MonoBehaviour
 
     private int current_health_points;
 
-    private GameObject target;
+    [SerializeField] private GameObject target;
 
     private void Awake()
     {

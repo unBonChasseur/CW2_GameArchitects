@@ -35,6 +35,7 @@ public class interactableLog : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.E))
             {
                 player.GetComponent<playerStatus>().updateWood(1);
+                //player.GetComponent<PlayerController>.StartCoroutine(InteractAnimation(0));
             }
 
         }
