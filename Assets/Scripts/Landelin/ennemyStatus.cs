@@ -21,9 +21,15 @@ public class ennemyStatus : MonoBehaviour
         current_health_points += damage; 
         if(current_health_points <= 0)
         {
-            target.GetComponent<plantStatus>().updateisTargeted(false);
-            Destroy(gameObject);
+            death();
         }
+    }
+
+    public void death()
+    {
+        Debug.Log(target);
+        target.GetComponentInChildren<plantStatus>().updateisTargeted(false);
+        Destroy(gameObject);
     }
 
     public int getHealthPoints()

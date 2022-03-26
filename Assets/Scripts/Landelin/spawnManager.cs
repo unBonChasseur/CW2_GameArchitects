@@ -17,7 +17,9 @@ public class spawnManager : MonoBehaviour
     private AudioManager c_audio; 
     private Stopwatch timer;
 
-    [SerializeField] private GameObject[] plants; 
+    [SerializeField] private GameObject[] plants;
+
+    private bool newDay; 
 
 
     private void Start()
@@ -26,13 +28,18 @@ public class spawnManager : MonoBehaviour
         day_script =  day_obj.GetComponent<LightingManager>();
         timer = new Stopwatch();
         StartCoroutine(c_updatePlants());
+
+        newDay = false;
     }
 
     private void Update()
     {
         musics();
+        dispawnEnnemiesOnDaylight();
+
         if (day_script.getTimeOfDay() < startOfDay || day_script.getTimeOfDay() > endOfDay)
         {
+            newDay = true;
             if(plants.Length > 0)
             { 
                 if (!timer.IsRunning)
@@ -43,7 +50,7 @@ public class spawnManager : MonoBehaviour
                         {
                             plant.GetComponentInChildren<plantStatus>().updateisTargeted(true);
                             int rand = Random.Range(0, spawnPoints.Length - 1);
-                            GameObject newZ = Instantiate(zombie, spawnPoints[rand]);
+                            GameObject newZ = Instantiate(zombie, spawnPoints[rand].transform.position, Quaternion.identity);
                             newZ.GetComponent<ennemyStatus>().updateTarget(plant);
                             timer.Start();
                             break;
@@ -100,5 +107,26 @@ public class spawnManager : MonoBehaviour
                 c_audio.Play("Day");
             }
         }
+    }
+
+    private void dispawnEnnemiesOnDaylight()
+    {
+        if (day_script.getTimeOfDay() > startOfDay && day_script.getTimeOfDay() < endOfDay)
+        {
+            if (newDay == true)
+            {
+                newDay = false;
+                GameObject[] zombies = GameObject.FindGameObjectsWithTag("Ennemy");
+                foreach (GameObject zombie in zombies)
+                {
+                    zombie.GetComponent<ennemyStatus>().death();
+                }
+
+            }
+            else
+                return;
+        }
+        else
+            return;
     }
 }
