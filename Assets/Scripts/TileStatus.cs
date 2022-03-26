@@ -261,6 +261,7 @@ public class TileStatus : MonoBehaviour
             {
                 float nutritiveValue = m_instantiatePlant.GetComponentInChildren<plantStatus>().getNutritiveValue();
                 Destroy(m_instantiatePlant);
+                m_instantiatePlant = null;
                 StartCoroutine(DirtToGrass());
                 return nutritiveValue;
             }
@@ -303,11 +304,12 @@ public class TileStatus : MonoBehaviour
     {
         WaitForSeconds wait = new WaitForSeconds(1);
         float timeReset = m_ToGrassDuration * 60;
+
         while (m_isSpaded && !m_instantiatePlant)
         {
             yield return wait;
             timeReset--;
-            if(timeReset == 0)
+            if(timeReset <= 0)
             {
                 m_isSpaded = false;
                 GetComponent<Renderer>().material = m_grassMaterial;
