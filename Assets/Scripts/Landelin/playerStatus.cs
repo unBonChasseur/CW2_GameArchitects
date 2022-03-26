@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class playerStatus : MonoBehaviour
 {
-    [SerializeField] private float hunger;
+    [SerializeField] private float maxHunger;
+    private float hunger;
     [SerializeField] private int wood;
     [SerializeField] private int m_initWater;
     [SerializeField] private int m_water;
@@ -14,6 +15,7 @@ public class playerStatus : MonoBehaviour
         m_initWater = 3;
         wood = 0;
         m_water = 0;
+        hunger = maxHunger; 
     }
 
     public void updateHunger(float damage)
@@ -25,6 +27,10 @@ public class playerStatus : MonoBehaviour
         return hunger;
     }
 
+    public float getMaxHunger()
+    {
+        return maxHunger;
+    }
     public void updateWood(int amount)
     {
         if (amount < 0 && wood - amount < 0)
@@ -50,5 +56,10 @@ public class playerStatus : MonoBehaviour
     public int getWater()
     {
         return m_water;
+    }
+
+    public int getMaxWater()
+    {
+        return m_initWater;
     }
 }

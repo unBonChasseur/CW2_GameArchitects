@@ -10,7 +10,7 @@ public class playerMovementManager : MonoBehaviour
     [SerializeField] private float mouse_sensitivity; 
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
