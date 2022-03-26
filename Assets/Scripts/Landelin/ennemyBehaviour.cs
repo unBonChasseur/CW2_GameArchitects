@@ -12,11 +12,12 @@ public class ennemyBehaviour : MonoBehaviour
     private bool m_animationRunning;
 
     private RaycastHit m_hit;
+    [SerializeField] private int m_attackDamages;
 
     private bool m_velocityIncrease;
     private float m_lastMagnitude;
 
-    private float m_waitBeforeAttack;
+    [SerializeField] private float m_waitBeforeAttack;
 
     void Start()
     {
@@ -25,13 +26,17 @@ public class ennemyBehaviour : MonoBehaviour
         m_navMeshAgent = this.GetComponent<NavMeshAgent>();
         status = this.GetComponent<ennemyStatus>();
 
-        //m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+        m_navMeshAgent.SetDestination(status.getTarget().transform.position);
 
     }
 
     void Update()
     {
         //Go to target position
+        //if (!status.getTarget())
+        //{
+        //    Destroy(gameObject);
+        //}
 
         if(m_navMeshAgent.velocity.magnitude != 0)
         {
@@ -47,7 +52,9 @@ public class ennemyBehaviour : MonoBehaviour
 
         if (m_navMeshAgent.velocity.magnitude <= 0.2f && !m_velocityIncrease)
         {
-            m_animator.SetBool("Walk", false); 
+            m_velocityIncrease = true;
+            m_navMeshAgent.isStopped = true;
+            m_animator.SetBool("Walk", false);
             
             float difx = this.transform.position.x - status.getTarget().transform.position.x;
             float difz = this.transform.position.z - status.getTarget().transform.position.z;
@@ -65,7 +72,7 @@ public class ennemyBehaviour : MonoBehaviour
                     //Si au dessus
                     if (difz >= 0)
                     {
-                        if (Physics.Raycast(transform.position, Vector3.back, out m_hit) && !m_animationRunning)
+                        if (Physics.Raycast(transform.position, Vector3.back, out m_hit) && !m_animationRunning && m_hit.distance < .5f)
                         {
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
@@ -73,7 +80,7 @@ public class ennemyBehaviour : MonoBehaviour
                     }
                     else
                     {
-                        if (Physics.Raycast(transform.position, Vector3.forward, out m_hit) && !m_animationRunning)
+                        if (Physics.Raycast(transform.position, Vector3.forward, out m_hit) && !m_animationRunning && m_hit.distance < .5f)
                         {
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
@@ -85,7 +92,7 @@ public class ennemyBehaviour : MonoBehaviour
                     //Si à droite
                     if (difx >= 0)
                     {
-                        if (Physics.Raycast(transform.position, Vector3.left, out m_hit) && !m_animationRunning)
+                        if (Physics.Raycast(transform.position, Vector3.left, out m_hit) && !m_animationRunning && m_hit.distance <.5f)
                         {
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
@@ -93,7 +100,7 @@ public class ennemyBehaviour : MonoBehaviour
                     }
                     else
                     {
-                        if (Physics.Raycast(transform.position, Vector3.right, out m_hit) && !m_animationRunning)
+                        if (Physics.Raycast(transform.position, Vector3.right, out m_hit) && !m_animationRunning && m_hit.distance < .5f)
                         {
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
@@ -103,48 +110,28 @@ public class ennemyBehaviour : MonoBehaviour
             }
 
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            SetDestinationToMousePosition();
-        }
-    }
-
-    void SetDestinationToMousePosition()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
-        {
-            m_navMeshAgent.SetDestination(hit.point);
-        }
     }
 
     private IEnumerator attackFence(GameObject hitObject)
     {
-        m_velocityIncrease = true;
         float waitBeforeAttack = m_waitBeforeAttack;
         WaitForSeconds wait = new WaitForSeconds(1);
-        while (hitObject)
-        {
-            //StartCoroutine(launchAnimation(0, waitBeforeAttack - 1.5f));
-            while (waitBeforeAttack > 0)
-            {
-                yield return wait;
-                waitBeforeAttack--;
 
-                if (waitBeforeAttack <= 0)
-                {
-                    //StartCoroutine(launchAnimation(1, 1.5f));
-                }
-            }
-            waitBeforeAttack = m_waitBeforeAttack;
-        }
-        if (!hitObject)
+        while (waitBeforeAttack > 0 && hitObject)
         {
-            m_animator.SetBool("Walk", true);
-            //m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+            yield return wait;
+            waitBeforeAttack--;
+
+            if (waitBeforeAttack == 0 && hitObject)
+            {
+                StartCoroutine(launchAnimation(1, 1.5f));
+                hitObject.GetComponentInChildren<fenceStatus>().updateCurrentHP(-m_attackDamages);
+                waitBeforeAttack = m_waitBeforeAttack;
+                yield return new WaitForSeconds(1.5f);
+            }
         }
+        m_navMeshAgent.isStopped = false;
+        m_navMeshAgent.SetDestination(status.getTarget().transform.position);
 
     }
 
@@ -169,10 +156,6 @@ public class ennemyBehaviour : MonoBehaviour
     {
         switch (x)
         {
-            case 0:
-                m_animator.SetBool("Idle", m_animationRunning);
-                break;
-
             case 1:
                 m_animator.SetBool("Attack", m_animationRunning);
                 break;
@@ -180,7 +163,6 @@ public class ennemyBehaviour : MonoBehaviour
             case 2:
                 m_animator.SetBool("Eat", m_animationRunning);
                 break;
-
         }
     }
 

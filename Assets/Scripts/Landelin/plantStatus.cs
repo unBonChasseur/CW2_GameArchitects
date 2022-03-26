@@ -11,7 +11,7 @@ public class plantStatus : MonoBehaviour
 
     private bool m_isWatered = false;
     private float m_wateredTime = 0;
-    private bool isTargeted; 
+    private bool isTargeted = false; 
 
     void Start()
     {

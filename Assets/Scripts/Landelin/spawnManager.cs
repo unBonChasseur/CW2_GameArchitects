@@ -16,10 +16,10 @@ public class spawnManager : MonoBehaviour
 
     private Stopwatch timer;
 
-    private GameObject[] plants; 
+    [SerializeField] private GameObject[] plants; 
 
 
-    private void Awake()
+    private void Start()
     {
         day_script =  day_obj.GetComponent<LightingManager>();
         timer = new Stopwatch();
@@ -36,9 +36,9 @@ public class spawnManager : MonoBehaviour
                 {
                     foreach (GameObject plant in plants)
                     {
-                        if (plant.GetComponent<plantStatus>().getisTargeted() == false)
+                        if (plant && plant.GetComponentInChildren<plantStatus>().getisTargeted() == false)
                         {
-                            plant.GetComponent<plantStatus>().updateisTargeted(true);
+                            plant.GetComponentInChildren<plantStatus>().updateisTargeted(true);
                             int rand = Random.Range(0, spawnPoints.Length - 1);
                             GameObject newZ = Instantiate(zombie, spawnPoints[rand]);
                             newZ.GetComponent<ennemyStatus>().updateTarget(plant);
