@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    private playerStatus status;
+
     //Hashes useful for animations
     [Header("Animations")]
     [SerializeField] private Animator m_animator;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        status = GetComponent<playerStatus>();
         m_walkingXHash = Animator.StringToHash("IsWalking");
         m_walkingXHash = Animator.StringToHash("WalkingX");
         m_walkingZHash = Animator.StringToHash("WalkingZ");
@@ -79,36 +82,40 @@ public class PlayerController : MonoBehaviour
         {
             GameObject hitObject = m_hit.transform.gameObject;
 
-            // Create fences
+            // Create fences / update
             if (Input.GetKeyDown(KeyCode.F))
-                build(false, hitObject);
+                Build(false, hitObject);
 
-            // Create gates
+            // Create gates / open
             if (Input.GetKeyDown(KeyCode.G))
-                build(true, hitObject);
+                Build(true, hitObject);
+
+            //Destroy fence/gate
+            if (Input.GetKeyDown(KeyCode.X))
+                DestroyFence(hitObject);
 
             // Spade the ground // Plant 
             if (Input.GetKeyDown(KeyCode.Keypad1))
-                plant(0, hitObject);
+                Plant(0, hitObject);
 
             if (Input.GetKeyDown(KeyCode.Keypad2))
-                plant(1, hitObject);
+                Plant(1, hitObject);
 
             if (Input.GetKeyDown(KeyCode.Keypad3))
-                plant(2, hitObject);
+                Plant(2, hitObject);
 
-            // Harvest plants
+            // Harvest plants // Water
             if (Input.GetKeyDown(KeyCode.E))
-                harvest(hitObject);
+                Harvest(hitObject);
         }
     }
 
     /// <summary>
-    /// Build / update
+    /// Build / update || openGate
     /// </summary>
     /// <param name="isGate"></param>
     /// <param name="hitObject"></param>
-    private void build(bool isGate, GameObject hitObject)
+    private void Build(bool isGate, GameObject hitObject)
     {
         int angle = (int)(m_playerTransform.rotation.eulerAngles.y / 90);
         if (m_playerTransform.rotation.eulerAngles.y % 90 > 45)
@@ -117,17 +124,36 @@ public class PlayerController : MonoBehaviour
         angle = isGate ? angle + 4 : angle;
 
         if(hitObject.GetComponent<TileStatus>().CreateFence(angle))
-            StartCoroutine(InteractAnimation(2));
+            StartCoroutine(launchAnimation(2));
 
         else
         {
-            int nbPlanksUpdate = hitObject.GetComponent<TileStatus>().UpdateFence(angle, GetComponent<playerStatus>().getWood());
-            if(nbPlanksUpdate != 0)
+            if (!isGate)
             {
-                GetComponent<playerStatus>().updateWood(-nbPlanksUpdate);
-                StartCoroutine(InteractAnimation(2));
+                int nbPlanksUpdate = hitObject.GetComponent<TileStatus>().UpdateFence(angle, status.getWood());
+                if (nbPlanksUpdate != 0)
+                {
+                    status.updateWood(-nbPlanksUpdate);
+                    StartCoroutine(launchAnimation(2));
+                }
             }
+            else
+                hitObject.GetComponent<TileStatus>().InteractGate(angle);
         }
+    }
+
+    /// <summary>
+    /// Destroy fence/gate
+    /// </summary>
+    /// <param name="hitObject"></param>
+    private void DestroyFence(GameObject hitObject)
+    {
+        int angle = (int)(m_playerTransform.rotation.eulerAngles.y / 90);
+        if (m_playerTransform.rotation.eulerAngles.y % 90 > 45)
+            angle = (angle + 1) % 4;
+
+        hitObject.GetComponent<TileStatus>().DestroyFence(angle);
+
     }
 
     /// <summary>
@@ -135,35 +161,37 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="i"></param>
     /// <param name="hitObject"></param>
-    private void plant(int i, GameObject hitObject)
+    private void Plant(int i, GameObject hitObject)
     {
         if (hitObject.GetComponent<TileStatus>().Spade())
-            StartCoroutine(InteractAnimation(0));
+            StartCoroutine(launchAnimation(0));
         else if (hitObject.GetComponent<TileStatus>().PlantGround(i))
-            StartCoroutine(InteractAnimation(1));
+            StartCoroutine(launchAnimation(1));
     }
 
     /// <summary>
     /// Harvest / Water
     /// </summary>
     /// <param name="hitObject"></param>
-    private void harvest(GameObject hitObject)
+    private void Harvest(GameObject hitObject)
     {
         float nutritiveValue = hitObject.GetComponent<TileStatus>().Harvest();
         if (nutritiveValue != 0)
         {
-            StartCoroutine(InteractAnimation(1));
-            GetComponent<playerStatus>().updateHunger(nutritiveValue);
+            StartCoroutine(launchAnimation(1));
+            status.updateHunger(nutritiveValue);
         }
-        else if(GetComponent<playerStatus>().getWater() > 0)
+        else if(status.getWater() > 0)
         {
-            StartCoroutine(InteractAnimation(1));
-            if(hitObject.GetComponent<TileStatus>().WaterPlants())
-                GetComponent<playerStatus>().decreaseWater(1);
+            if (hitObject.GetComponent<TileStatus>().WaterPlants())
+            {
+                status.decreaseWater(1);
+                StartCoroutine(launchAnimation(1));
+            }
         }
     }
 
-    private IEnumerator InteractAnimation(int AnimationNumber)
+    private IEnumerator launchAnimation(int AnimationNumber)
     {
         m_isWorking = true;
         animationChangeStatus(AnimationNumber);

@@ -58,7 +58,6 @@ public class plantStatus : MonoBehaviour
     public void WaterPlant(float wateredTime)
     {
         m_wateredTime = wateredTime;
-        Debug.Log(!m_isWatered);
 
         if (!m_isWatered)
         {

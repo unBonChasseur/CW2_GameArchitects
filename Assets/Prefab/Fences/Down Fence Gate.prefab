@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3435689102579121808
+--- !u!1 &3179572463009965800
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3435689102579540656}
-  - component: {fileID: 3435689102578246288}
-  - component: {fileID: 3435689102577115216}
-  - component: {fileID: 2457743890081587711}
-  - component: {fileID: 5245474731539797724}
-  - component: {fileID: 1874059785}
-  - component: {fileID: 1874059784}
+  - component: {fileID: 3179572463010134728}
+  - component: {fileID: 3179572463010937576}
+  - component: {fileID: 3179572463011903528}
+  - component: {fileID: 2420034223357901191}
+  - component: {fileID: 5423937298029711012}
+  - component: {fileID: 256170018604710513}
+  - component: {fileID: 256170018604710512}
   m_Layer: 0
   m_Name: Down Fence Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &3435689102579540656
+--- !u!4 &3179572463010134728
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0.1, y: 0.95, z: -0.96}
+  m_GameObject: {fileID: 3179572463009965800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children:
-  - {fileID: 3871091085003216177}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 3435689102579540656}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!33 &3435689102578246288
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3179572463010937576
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
+  m_GameObject: {fileID: 3179572463009965800}
   m_Mesh: {fileID: 4300000, guid: bf7d0ec61e8384e9d81ea708769f3f7b, type: 3}
---- !u!23 &3435689102577115216
+--- !u!23 &3179572463011903528
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
+  m_GameObject: {fileID: 3179572463009965800}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,43 +85,43 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2457743890081587711
+--- !u!65 &2420034223357901191
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
+  m_GameObject: {fileID: 3179572463009965800}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.0012655943, y: 0.0095810825, z: 0.008258369}
   m_Center: {x: -0.00044241073, y: 0.0052381954, z: -0.0040557226}
---- !u!114 &5245474731539797724
+--- !u!114 &5423937298029711012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
+  m_GameObject: {fileID: 3179572463009965800}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c51171cc52b29c6498c914629bcb1655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0.2
+  distance: 0.4
   target:
     serializedVersion: 2
     m_Bits: 8
   UI_obj: {fileID: 3871091085003216176}
---- !u!114 &1874059785
+--- !u!114 &256170018604710513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
+  m_GameObject: {fileID: 3179572463009965800}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 026ec6929070d1d40b8aa20df8993b44, type: 3}
@@ -130,13 +129,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_HP: 01000000020000000300000004000000
   nbPlanksToUpgrade: 01000000020000000300000004000000
---- !u!114 &1874059784
+--- !u!114 &256170018604710512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435689102579121808}
+  m_GameObject: {fileID: 3179572463009965800}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 600265ba7fc63ae49bd29ec9a1400211, type: 3}
@@ -146,6 +145,55 @@ MonoBehaviour:
   nbPlanks: {fileID: 3871091084410828716}
   t_currentHP: {fileID: 3871091083865402377}
   s_currentHP: {fileID: 3871091083339952863}
+--- !u!1 &3435689102579121808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3435689102579540656}
+  - component: {fileID: 6872490490874675018}
+  m_Layer: 0
+  m_Name: Down Fence Gate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &3435689102579540656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0.1, y: 0.95, z: -0.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3179572463010134728}
+  - {fileID: 3871091085003216177}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!208 &6872490490874675018
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.5, z: 0.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: -0.4}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1968318681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155,47 +203,47 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.005
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.005
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.005
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3871091083070832104, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -213,9 +261,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: FenceUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3871091083070832105, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091083240370836, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091083650735992, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3871091084014840941, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091084014840942, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091084033181236, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091084175968706, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091084212339922, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091084737829384, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871091085108135923, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d96ec2fe9f154143870353a5e4bcdf3, type: 3}
