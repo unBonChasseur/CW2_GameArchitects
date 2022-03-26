@@ -11,7 +11,9 @@ public class plantStatus : MonoBehaviour
 
     private bool m_isWatered = false;
     private float m_wateredTime = 0;
-    private bool isTargeted = false; 
+    private bool isTargeted = false;
+
+    private TileStatus tile; 
 
     void Start()
     {
@@ -90,5 +92,15 @@ public class plantStatus : MonoBehaviour
     public void updateisTargeted(bool state)
     {
         isTargeted = state; 
+    }
+
+    public void setTile(TileStatus newTile)
+    {
+        tile = newTile;
+    }
+
+    public void destroyPlant()
+    {
+        tile.destroyInstancePlant();
     }
 }

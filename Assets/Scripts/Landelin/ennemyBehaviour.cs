@@ -147,7 +147,7 @@ public class ennemyBehaviour : MonoBehaviour
         
         if(AnimationNumber == 2)
         {
-            Destroy(status.getTarget());
+            status.getTarget().GetComponentInChildren<plantStatus>().destroyPlant();
             Destroy(gameObject);
         }
     }
