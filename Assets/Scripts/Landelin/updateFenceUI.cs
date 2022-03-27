@@ -25,7 +25,7 @@ public class updateFenceUI : MonoBehaviour
         t_currentHP.text = status.getCurrentHP().ToString() + " / " + status.getLevelMaxHP();
         s_currentHP.value = status.getCurrentHP();
         if (status.getNbPlanksToUpgrade() != -1)
-            nbPlanks.text = status.getNbPlanksToUpgrade().ToString() + " to upgrade !";
+            nbPlanks.text =  "<F> to upgrade ! (cost " + status.getNbPlanksToUpgrade().ToString() + ")";
         else
             nbPlanks.text = "MAX Level";
     }

@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         
         if (hitObject.GetComponent<TileStatus>().HasFence(angle))
         {
-            if (status.getWood() > 1)
+            if (status.getWood() >= 1)
             {
                 hitObject.GetComponent<TileStatus>().CreateFence(angle);
                 status.updateWood(-1);
