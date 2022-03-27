@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerStatus : MonoBehaviour
 {
     [SerializeField] private float maxHunger;
-    private float hunger;
+    [SerializeField] private float hunger;
     [SerializeField] private int wood;
     [SerializeField] private int m_initWater;
     [SerializeField] private int m_water;
@@ -15,7 +15,8 @@ public class playerStatus : MonoBehaviour
         m_initWater = 3;
         wood = 0;
         m_water = 0;
-        hunger = maxHunger; 
+        hunger = maxHunger;
+        StartCoroutine(HungerGame());
     }
 
     public void updateHunger(float damage)
@@ -62,4 +63,17 @@ public class playerStatus : MonoBehaviour
     {
         return m_initWater;
     }
+
+    private IEnumerator HungerGame()
+    {
+        WaitForSeconds wait = new WaitForSeconds(1);
+
+        while(hunger > 0)
+        {
+            yield return wait;
+            hunger--;
+        }
+        Debug.Log("EndGame");
+    }
+
 }
