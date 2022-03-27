@@ -96,13 +96,13 @@ public class PlayerController : MonoBehaviour
                 DestroyFence(hitObject);
 
             // Spade the ground // Plant 
-            if (Input.GetKeyDown(KeyCode.Keypad1))
+            if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
                 Plant(0, hitObject);
 
-            if (Input.GetKeyDown(KeyCode.Keypad2))
+            if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
                 Plant(1, hitObject);
 
-            if (Input.GetKeyDown(KeyCode.Keypad3))
+            if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
                 Plant(2, hitObject);
 
             // Harvest plants // Water
@@ -127,15 +127,14 @@ public class PlayerController : MonoBehaviour
 
         angle = isGate ? angle + 4 : angle;
         
-        if (hitObject.GetComponent<TileStatus>().CreateFence(angle))
+        if (hitObject.GetComponent<TileStatus>().HasFence(angle))
         {
             if (status.getWood() > 1)
             {
+                hitObject.GetComponent<TileStatus>().CreateFence(angle);
                 status.updateWood(-1);
                 StartCoroutine(launchAnimation(2));
             }
-            else
-                hitObject.GetComponent<TileStatus>().DestroyFence(angle);
         }
 
         else

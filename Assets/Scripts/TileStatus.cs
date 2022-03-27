@@ -88,6 +88,43 @@ public class TileStatus : MonoBehaviour
 
     }
 
+
+    public bool HasFence(int nbFence)
+    {
+        switch (nbFence % 4)
+        {
+            case 0:
+                if (!m_instantiateUp)
+                {
+                    return true;
+                }
+                break;
+
+            case 1:
+                if (!m_instantiateRight)
+                {
+                    return true;
+                }
+                break;
+
+            case 2:
+                if (!m_instantiateDown)
+                {
+                    return true;
+                }
+                break;
+
+            case 3:
+                if (!m_instantiateLeft)
+                {
+                    return true;
+                }
+                break;
+        }
+        return false;
+
+    }
+
     public int UpdateFence(int nbFence, int nbWood)
     {
         int nbPlanks = -1;
