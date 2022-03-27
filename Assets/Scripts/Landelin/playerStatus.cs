@@ -10,8 +10,11 @@ public class playerStatus : MonoBehaviour
     [SerializeField] private int m_initWater;
     [SerializeField] private int m_water;
 
+    private bool isDead; 
+
     private void Awake()
     {
+        isDead = false;
         m_initWater = 3;
         wood = 0;
         m_water = 0;
@@ -22,6 +25,8 @@ public class playerStatus : MonoBehaviour
     public void updateHunger(float damage)
     {
         hunger += damage;
+        if (hunger <= 0)
+            isDead = true;
     }
     public float getHunger()
     {
@@ -71,9 +76,14 @@ public class playerStatus : MonoBehaviour
         while(hunger > 0)
         {
             yield return wait;
-            hunger--;
+            updateHunger(-1);
         }
-        Debug.Log("EndGame");
+        //Debug.Log("EndGame");
+    }
+
+    public bool getPlayerIsDead()
+    {
+        return isDead;
     }
 
 }
