@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Plant
+  - Ennemy
+  - Hammer
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - UI
   - GardenTile
   - ExternalTile
-  - 
+  - Hammer
   - 
   - 
   - 

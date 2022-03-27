@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class playerStatus : MonoBehaviour
 {
-    private float hunger; 
-    private int wood;
+    [SerializeField] private float maxHunger;
+    [SerializeField] private float hunger;
+    [SerializeField] private int wood;
+    [SerializeField] private int m_initWater;
+    [SerializeField] private int m_water;
+
+    private bool isDead; 
 
     private void Awake()
     {
+        isDead = false;
+        m_initWater = 3;
         wood = 0;
+        m_water = 0;
+        hunger = maxHunger;
+        StartCoroutine(HungerGame());
     }
 
     public void updateHunger(float damage)
     {
         hunger += damage;
+        if (hunger <= 0)
+            isDead = true;
     }
     public float getHunger()
     {
         return hunger;
     }
 
+    public float getMaxHunger()
+    {
+        return maxHunger;
+    }
     public void updateWood(int amount)
     {
         if (amount < 0 && wood - amount < 0)
@@ -32,4 +48,42 @@ public class playerStatus : MonoBehaviour
     {
         return wood; 
     }
+
+    public void decreaseWater(int amount)
+    {
+        m_water -= amount;
+    }
+
+    public void resetWater()
+    {
+        m_water = m_initWater;
+    }
+
+    public int getWater()
+    {
+        return m_water;
+    }
+
+    public int getMaxWater()
+    {
+        return m_initWater;
+    }
+
+    private IEnumerator HungerGame()
+    {
+        WaitForSeconds wait = new WaitForSeconds(1);
+
+        while(hunger > 0)
+        {
+            yield return wait;
+            updateHunger(-1);
+        }
+        //Debug.Log("EndGame");
+    }
+
+    public bool getPlayerIsDead()
+    {
+        return isDead;
+    }
+
 }

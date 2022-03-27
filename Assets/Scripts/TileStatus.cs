@@ -5,82 +5,360 @@ using UnityEngine;
 public class TileStatus : MonoBehaviour
 {
     // Up Right Down Left
-    public bool[] m_fenceExists; 
-    public GameObject[] m_Fence;
-    public GameObject m_InstantiateUp;
-    public GameObject m_InstantiateRight;
-    public GameObject m_InstantiateDown;
-    public GameObject m_InstantiateLeft;
+    [Header("Fences")]
+    [SerializeField] private GameObject[] m_fence;
+    [SerializeField] private bool[] m_isGate;
+    [SerializeField] private bool[] m_gateOpened;
+    private GameObject m_instantiateUp;
+    private GameObject m_instantiateRight;
+    private GameObject m_instantiateDown;
+    private GameObject m_instantiateLeft;
 
-    public GameObject[] m_Plant;
-    public GameObject m_instantiatePlant;
-    public bool m_hasPlant = false;
+    [Header("Plant")]
+    [SerializeField] private GameObject[] m_plant;
+    private GameObject m_instantiatePlant;
 
-    public Material GrassMaterial;
-    public Material DirtMaterial;
+    [Header("Ground")]
+    private bool m_isSpaded = false;
+    private float m_waterTimeMax = 30;
+    private float m_waterTime = 0;
+    [SerializeField] private float m_ToGrassDuration = 3;
+    [SerializeField] private Material m_grassMaterial;
+    [SerializeField] private Material m_dirtMaterial;
+    [SerializeField] private Material m_wetDirtMaterial;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public bool CreateFence(int nbFence)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void InteractFence(int nbFence, bool isGate)
-    {
-        if (!m_fenceExists[nbFence])
+        switch (nbFence%4)
         {
+            case 0:
+                if (!m_instantiateUp)
+                {
+                    m_instantiateUp = Instantiate(m_fence[nbFence]);
+                    m_instantiateUp.transform.position = new Vector3(m_instantiateUp.transform.position.x + (int)transform.position.x, .95f, m_instantiateUp.transform.position.z + (int)transform.position.z);
+
+                    if (nbFence >= 4)
+                        m_isGate[nbFence % 4] = true;
+
+                    return true;
+                }
+                break;
+
+            case 1:
+                if (!m_instantiateRight)
+                {
+                    m_instantiateRight = Instantiate(m_fence[nbFence]);
+                    m_instantiateRight.transform.position = new Vector3(m_instantiateRight.transform.position.x + (int)transform.position.x, .95f, m_instantiateRight.transform.position.z + (int)transform.position.z);
+
+                    if (nbFence >= 4)
+                        m_isGate[nbFence % 4] = true;
+
+                    return true;
+                }
+                break;
+
+            case 2:
+                if (!m_instantiateDown)
+                {
+                    m_instantiateDown = Instantiate(m_fence[nbFence]);
+                    m_instantiateDown.transform.position = new Vector3(m_instantiateDown.transform.position.x + (int)transform.position.x, .95f, m_instantiateDown.transform.position.z + (int)transform.position.z);
+
+                    if (nbFence >= 4)
+                        m_isGate[nbFence % 4] = true;
+
+                    return true;
+                }
+                break;
+
+            case 3:
+                if (!m_instantiateLeft)
+                {
+                    m_instantiateLeft = Instantiate(m_fence[nbFence]);
+                    m_instantiateLeft.transform.position = new Vector3(m_instantiateLeft.transform.position.x + (int)transform.position.x, .95f, m_instantiateLeft.transform.position.z + (int)transform.position.z);
+
+                    if (nbFence >= 4)
+                        m_isGate[nbFence % 4] = true;
+
+                    return true;
+                }
+                break;
+        }
+        return false;
+
+    }
+
+
+    public bool HasFence(int nbFence)
+    {
+        switch (nbFence % 4)
+        {
+            case 0:
+                if (!m_instantiateUp)
+                {
+                    return true;
+                }
+                break;
+
+            case 1:
+                if (!m_instantiateRight)
+                {
+                    return true;
+                }
+                break;
+
+            case 2:
+                if (!m_instantiateDown)
+                {
+                    return true;
+                }
+                break;
+
+            case 3:
+                if (!m_instantiateLeft)
+                {
+                    return true;
+                }
+                break;
+        }
+        return false;
+
+    }
+
+    public int UpdateFence(int nbFence, int nbWood)
+    {
+        int nbPlanks = -1;
+        switch (nbFence)
+        {
+            case 0:
+                if(m_instantiateUp)
+                    nbPlanks = m_instantiateUp.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
+                break;
+
+            case 1:
+                if(m_instantiateRight)
+                    nbPlanks = m_instantiateRight.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
+                break;
+
+            case 2:
+                if(m_instantiateDown)
+                    nbPlanks = m_instantiateDown.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
+                break;
+
+            case 3:
+                if(m_instantiateLeft)
+                    nbPlanks = m_instantiateLeft.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
+                break;
+        }
+
+        if (nbWood >= nbPlanks && nbPlanks != -1) 
+        { 
             switch (nbFence)
             {
                 case 0:
-                    m_InstantiateUp = Instantiate(m_Fence[nbFence]);
-                    m_InstantiateUp.transform.position = new Vector3(m_InstantiateUp.transform.position.x + (int)transform.position.x, .95f, m_InstantiateUp.transform.position.z + (int)transform.position.z);
+                    if(m_instantiateUp)
+                        m_instantiateUp.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
 
                 case 1:
-                    m_InstantiateRight = Instantiate(m_Fence[nbFence]);
-                    m_InstantiateRight.transform.position = new Vector3(m_InstantiateRight.transform.position.x + (int)transform.position.x, .95f, m_InstantiateRight.transform.position.z + (int)transform.position.z);
+                    if(m_instantiateRight)
+                        m_instantiateRight.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
 
                 case 2:
-                    m_InstantiateDown = Instantiate(m_Fence[nbFence]);
-                    m_InstantiateDown.transform.position = new Vector3(m_InstantiateDown.transform.position.x + (int)transform.position.x, .95f, m_InstantiateDown.transform.position.z + (int)transform.position.z);
+                    if(m_instantiateDown)
+                        m_instantiateDown.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
 
                 case 3:
-                    m_InstantiateLeft = Instantiate(m_Fence[nbFence]);
-                    m_InstantiateLeft.transform.position = new Vector3(m_InstantiateLeft.transform.position.x + (int)transform.position.x, .95f, m_InstantiateLeft.transform.position.z + (int)transform.position.z);
+                    if(m_instantiateLeft)
+                        m_instantiateLeft.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
             }
+            return nbPlanks; 
+        }
+        else
+            return 0;
+    }
 
-            m_fenceExists[nbFence] = !m_fenceExists[nbFence];
+    public void DestroyFence(int nbFence)
+    {
+        switch (nbFence%4)
+        {
+            case 0:
+                if(m_instantiateUp)
+                    Destroy(m_instantiateUp);
+                break;
+
+            case 1:
+                if(m_instantiateRight)
+                    Destroy(m_instantiateRight);
+                break;
+
+            case 2:
+                if(m_instantiateDown)
+                    Destroy(m_instantiateDown);
+                break;
+
+            case 3:
+                if(m_instantiateLeft)
+                    Destroy(m_instantiateLeft);
+                break;
+        }
+
+        m_isGate[nbFence] = false;
+        m_gateOpened[nbFence] = false;
+    }
+
+    public void InteractGate(int nbFence)
+    {
+        switch (nbFence % 4)
+        {
+            case 0:
+                if (m_instantiateUp && nbFence >= 4 && m_isGate[nbFence % 4])
+                {
+                    if (!m_gateOpened[nbFence % 4])
+                        m_instantiateUp.transform.rotation = m_fence[(nbFence + 3) % 4].transform.rotation;
+                    else
+                        m_instantiateUp.transform.rotation = m_fence[nbFence].transform.rotation;
+
+                    m_gateOpened[nbFence % 4] = !m_gateOpened[nbFence % 4];
+                }
+                break;
+
+            case 1:
+                if (m_instantiateRight && nbFence >= 4 && m_isGate[nbFence % 4])
+                {
+                    if (!m_gateOpened[nbFence % 4])
+                        m_instantiateRight.transform.rotation = m_fence[(nbFence + 3) % 4].transform.rotation;
+                    else
+                        m_instantiateRight.transform.rotation = m_fence[nbFence].transform.rotation;
+
+                    m_gateOpened[nbFence % 4] = !m_gateOpened[nbFence % 4];
+                }
+                break;
+
+            case 2:
+                if (m_instantiateDown && nbFence >= 4 && m_isGate[nbFence % 4])
+                {
+                    if (!m_gateOpened[nbFence % 4])
+                        m_instantiateDown.transform.rotation = m_fence[(nbFence + 3) % 4].transform.rotation;
+                    else
+                        m_instantiateDown.transform.rotation = m_fence[nbFence].transform.rotation;
+
+                    m_gateOpened[nbFence % 4] = !m_gateOpened[nbFence % 4];
+                }
+                break;
+
+            case 3:
+                if (m_instantiateLeft && nbFence >= 4 && m_isGate[nbFence % 4])
+                {
+                    if (!m_gateOpened[nbFence % 4])
+                        m_instantiateLeft.transform.rotation = m_fence[(nbFence + 3) % 4].transform.rotation;
+                    else
+                        m_instantiateLeft.transform.rotation = m_fence[nbFence].transform.rotation;
+
+                    m_gateOpened[nbFence % 4] = !m_gateOpened[nbFence % 4];
+                }
+                break;
         }
 
     }
 
-    public void InteractGround(bool planter, int nbPlant)
+    public bool Spade()
     {
-        if (!m_hasPlant && planter)
+        if (!m_isSpaded)
         {
-            Debug.Log("planter");
-            GetComponent<Renderer>().material = DirtMaterial;
-            m_instantiatePlant = Instantiate(m_Plant[nbPlant]);
-            ;
-            // Redemander à landelin pour les carrés
-            m_instantiatePlant.transform.position = new Vector3((int)transform.position.x + .3f, .95f, (int)transform.position.z + .3f - 1f);
+            m_isSpaded = true;
+            GetComponent<Renderer>().material = m_dirtMaterial;
+            StartCoroutine(DirtToGrass());
+            return true;
+        }
+        return false;
+    }
 
-            m_hasPlant = true;
-        }
-        else if(m_hasPlant && !planter)
+    public bool PlantGround(int nbPlant)
+    {
+        if (!m_instantiatePlant)
         {
-            Debug.Log("Récolter");
-            GetComponent<Renderer>().material = GrassMaterial;
-            m_hasPlant = false;
+            m_instantiatePlant = Instantiate(m_plant[nbPlant]);
+            m_instantiatePlant.GetComponentInChildren<plantStatus>().setTile(this);
+            m_instantiatePlant.transform.position = new Vector3((int)transform.position.x + .5f, .95f, (int)transform.position.z + .5f - 1f);
+            if (m_waterTime != 0)
+                m_instantiatePlant.GetComponent<plantStatus>().WaterPlant(m_waterTime);
+            return true;
         }
+        return false;
+    }
+
+    public float Harvest()
+    {
+        if (m_instantiatePlant)
+        {
+            if (m_instantiatePlant.GetComponent<plantStatus>().getCurrentTime() <= 0)
+            {
+                float nutritiveValue = m_instantiatePlant.GetComponent<plantStatus>().getNutritiveValue();
+                Destroy(m_instantiatePlant);
+                m_instantiatePlant = null;
+                StartCoroutine(DirtToGrass());
+                return nutritiveValue;
+            }
+        }
+        return 0;
+    }
+
+    public bool WaterPlants()
+    {
+        if (m_isSpaded)
+        {
+            if (m_instantiatePlant)
+            {
+                m_instantiatePlant.GetComponent<plantStatus>().WaterPlant(m_waterTimeMax);
+            }
+            GetComponent<Renderer>().material = m_wetDirtMaterial;
+
+            m_waterTime = m_waterTimeMax;
+            StartCoroutine(WetDirtToDirt());
+
+            return true;
+        }
+        return false;
+    }
+
+    private IEnumerator WetDirtToDirt()
+    {
+        m_waterTime = m_waterTimeMax;
+        WaitForSeconds wait = new WaitForSeconds(1);
+        while(m_waterTime > 0)
+        {
+            yield return wait;
+            m_waterTime--;
+        }
+        if(GetComponent<Renderer>().material != m_grassMaterial)
+            GetComponent<Renderer>().material = m_dirtMaterial;
+    }
+
+    private IEnumerator DirtToGrass()
+    {
+        WaitForSeconds wait = new WaitForSeconds(1);
+        float timeReset = m_ToGrassDuration * 60;
+
+        while (m_isSpaded && !m_instantiatePlant)
+        {
+            yield return wait;
+            timeReset--;
+            if(timeReset <= 0)
+            {
+                m_isSpaded = false;
+                GetComponent<Renderer>().material = m_grassMaterial;
+            }
+        }
+    }
+
+    public void destroyInstancePlant()
+    {
+        Destroy(m_instantiatePlant);
+        m_instantiatePlant = null;
+        StartCoroutine(DirtToGrass());
     }
 }

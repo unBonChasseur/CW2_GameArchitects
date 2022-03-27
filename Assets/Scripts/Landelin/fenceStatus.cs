@@ -15,7 +15,6 @@ public class fenceStatus : MonoBehaviour
         currentHP = max_HP[0];
     }
 
-
     public void updateCurrentHP(int damage)
     {
         currentHP += damage;
