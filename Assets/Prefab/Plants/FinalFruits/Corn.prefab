@@ -676,8 +676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutritiveValue: 5
-  growingTime: 10
+  nutritiveValue: 100
+  growingTime: 6
   plant: {fileID: 8976352892097889448}
 --- !u!114 &6096860877571537772
 MonoBehaviour:
