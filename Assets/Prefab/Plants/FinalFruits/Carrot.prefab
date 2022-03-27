@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 1035400456381132131}
   - component: {fileID: 8668547763678311126}
   - component: {fileID: 2411490504912801902}
+  - component: {fileID: 7812942454501294322}
+  - component: {fileID: 699667336142006489}
+  - component: {fileID: 7095100160963177184}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Plant
@@ -83,6 +86,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7812942454501294322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665502638981219914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838e1622e4f3cc049894d677c7baf1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_timer: {fileID: 8698788249047784759}
+  s_timer: {fileID: 8698788249040830839}
+--- !u!114 &699667336142006489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665502638981219914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49527c409cad524f8c979ccaf325dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.4
+  target:
+    serializedVersion: 2
+    m_Bits: 8
+  UI_obj: {fileID: 8698788249982551396}
+--- !u!114 &7095100160963177184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665502638981219914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritiveValue: 1
+  growingTime: 0.5
+  plant: {fileID: 4404671437780532671}
 --- !u!1 &4404671437780532671
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,9 +144,6 @@ GameObject:
   - component: {fileID: 4419783314936041125}
   - component: {fileID: 4427797886765130041}
   - component: {fileID: 4449657004920278845}
-  - component: {fileID: 2594572668302329465}
-  - component: {fileID: 2407143826343986489}
-  - component: {fileID: 6923752255658738747}
   m_Layer: 0
   m_Name: Carrot_Fruit
   m_TagString: Untagged
@@ -182,51 +228,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300022, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
---- !u!114 &2594572668302329465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404671437780532671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nutritiveValue: 1
-  growingTime: 0.5
---- !u!114 &2407143826343986489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404671437780532671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49527c409cad524f8c979ccaf325dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.4
-  target:
-    serializedVersion: 2
-    m_Bits: 8
-  UI_obj: {fileID: 8698788249982551396}
---- !u!114 &6923752255658738747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404671437780532671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838e1622e4f3cc049894d677c7baf1ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  t_timer: {fileID: 8698788249047784759}
-  s_timer: {fileID: 8698788249040830839}
 --- !u!1 &8530596379410709556
 GameObject:
   m_ObjectHideFlags: 0

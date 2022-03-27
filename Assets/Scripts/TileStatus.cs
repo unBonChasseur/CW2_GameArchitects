@@ -95,22 +95,22 @@ public class TileStatus : MonoBehaviour
         {
             case 0:
                 if(m_instantiateUp)
-                    nbPlanks = m_instantiateUp.GetComponentInChildren<fenceStatus>().getNbPlanksToUpgrade();
+                    nbPlanks = m_instantiateUp.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
                 break;
 
             case 1:
                 if(m_instantiateRight)
-                    nbPlanks = m_instantiateRight.GetComponentInChildren<fenceStatus>().getNbPlanksToUpgrade();
+                    nbPlanks = m_instantiateRight.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
                 break;
 
             case 2:
                 if(m_instantiateDown)
-                    nbPlanks = m_instantiateDown.GetComponentInChildren<fenceStatus>().getNbPlanksToUpgrade();
+                    nbPlanks = m_instantiateDown.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
                 break;
 
             case 3:
                 if(m_instantiateLeft)
-                    nbPlanks = m_instantiateLeft.GetComponentInChildren<fenceStatus>().getNbPlanksToUpgrade();
+                    nbPlanks = m_instantiateLeft.GetComponent<fenceStatus>().getNbPlanksToUpgrade();
                 break;
         }
 
@@ -120,22 +120,22 @@ public class TileStatus : MonoBehaviour
             {
                 case 0:
                     if(m_instantiateUp)
-                        m_instantiateUp.GetComponentInChildren<fenceStatus>().updateCurrentLevel();
+                        m_instantiateUp.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
 
                 case 1:
                     if(m_instantiateRight)
-                        m_instantiateRight.GetComponentInChildren<fenceStatus>().updateCurrentLevel();
+                        m_instantiateRight.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
 
                 case 2:
                     if(m_instantiateDown)
-                        m_instantiateDown.GetComponentInChildren<fenceStatus>().updateCurrentLevel();
+                        m_instantiateDown.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
 
                 case 3:
                     if(m_instantiateLeft)
-                        m_instantiateLeft.GetComponentInChildren<fenceStatus>().updateCurrentLevel();
+                        m_instantiateLeft.GetComponent<fenceStatus>().updateCurrentLevel();
                     break;
             }
             return nbPlanks; 
@@ -247,7 +247,7 @@ public class TileStatus : MonoBehaviour
             m_instantiatePlant = Instantiate(m_plant[nbPlant]);
             m_instantiatePlant.transform.position = new Vector3((int)transform.position.x + .5f, .95f, (int)transform.position.z + .5f - 1f);
             if (m_waterTime != 0)
-                m_instantiatePlant.GetComponentInChildren<plantStatus>().WaterPlant(m_waterTime);
+                m_instantiatePlant.GetComponent<plantStatus>().WaterPlant(m_waterTime);
             return true;
         }
         return false;
@@ -257,9 +257,9 @@ public class TileStatus : MonoBehaviour
     {
         if (m_instantiatePlant)
         {
-            if (m_instantiatePlant.GetComponentInChildren<plantStatus>().getCurrentTime() <= 0)
+            if (m_instantiatePlant.GetComponent<plantStatus>().getCurrentTime() <= 0)
             {
-                float nutritiveValue = m_instantiatePlant.GetComponentInChildren<plantStatus>().getNutritiveValue();
+                float nutritiveValue = m_instantiatePlant.GetComponent<plantStatus>().getNutritiveValue();
                 Destroy(m_instantiatePlant);
                 m_instantiatePlant = null;
                 StartCoroutine(DirtToGrass());
@@ -275,7 +275,7 @@ public class TileStatus : MonoBehaviour
         {
             if (m_instantiatePlant)
             {
-                m_instantiatePlant.GetComponentInChildren<plantStatus>().WaterPlant(m_waterTimeMax);
+                m_instantiatePlant.GetComponent<plantStatus>().WaterPlant(m_waterTimeMax);
             }
             GetComponent<Renderer>().material = m_wetDirtMaterial;
 

@@ -11,10 +11,6 @@ GameObject:
   - component: {fileID: 3179572463010134728}
   - component: {fileID: 3179572463010937576}
   - component: {fileID: 3179572463011903528}
-  - component: {fileID: 2420034223357901191}
-  - component: {fileID: 5423937298029711012}
-  - component: {fileID: 256170018604710513}
-  - component: {fileID: 256170018604710512}
   m_Layer: 0
   m_Name: Down Fence Gate
   m_TagString: Untagged
@@ -85,66 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2420034223357901191
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179572463009965800}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0012655943, y: 0.0095810825, z: 0.008258369}
-  m_Center: {x: -0.00044241073, y: 0.0052381954, z: -0.0040557226}
---- !u!114 &5423937298029711012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179572463009965800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51171cc52b29c6498c914629bcb1655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.4
-  target:
-    serializedVersion: 2
-    m_Bits: 8
-  UI_obj: {fileID: 3871091085003216176}
---- !u!114 &256170018604710513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179572463009965800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026ec6929070d1d40b8aa20df8993b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max_HP: 01000000020000000300000004000000
-  nbPlanksToUpgrade: 01000000020000000300000004000000
---- !u!114 &256170018604710512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179572463009965800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 600265ba7fc63ae49bd29ec9a1400211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: {fileID: 3871091083150585640}
-  nbPlanks: {fileID: 3871091084410828716}
-  t_currentHP: {fileID: 3871091083865402377}
-  s_currentHP: {fileID: 3871091083339952863}
 --- !u!1 &3435689102579121808
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +91,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3435689102579540656}
   - component: {fileID: 6872490490874675018}
+  - component: {fileID: 8823760024043479342}
+  - component: {fileID: 2031586288439417818}
+  - component: {fileID: 8597357197813044458}
+  - component: {fileID: 4971150021038885021}
   m_Layer: 0
   m_Name: Down Fence Gate
   m_TagString: Untagged
@@ -188,12 +128,72 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.05, y: 0.5, z: 0.4}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.45}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.5, z: -0.4}
   m_TimeToStationary: 0.5
+--- !u!114 &8823760024043479342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600265ba7fc63ae49bd29ec9a1400211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: {fileID: 3871091083150585640}
+  nbPlanks: {fileID: 3871091084410828716}
+  t_currentHP: {fileID: 3871091083865402377}
+  s_currentHP: {fileID: 3871091083339952863}
+--- !u!114 &2031586288439417818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51171cc52b29c6498c914629bcb1655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.4
+  target:
+    serializedVersion: 2
+    m_Bits: 8
+  UI_obj: {fileID: 3871091085003216176}
+--- !u!114 &8597357197813044458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ec6929070d1d40b8aa20df8993b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_HP: 01000000020000000300000004000000
+  nbPlanksToUpgrade: 01000000020000000300000004000000
+--- !u!65 &4971150021038885021
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435689102579121808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 1, z: 0.9}
+  m_Center: {x: 0, y: 0.5, z: -0.4}
 --- !u!1001 &1968318681
 PrefabInstance:
   m_ObjectHideFlags: 0

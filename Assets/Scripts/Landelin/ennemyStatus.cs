@@ -28,7 +28,7 @@ public class ennemyStatus : MonoBehaviour
     public void death()
     {
         Debug.Log(target);
-        target.GetComponentInChildren<plantStatus>().updateisTargeted(false);
+        target.GetComponent<plantStatus>().updateisTargeted(false);
         Destroy(gameObject);
     }
 

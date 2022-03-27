@@ -589,6 +589,9 @@ GameObject:
   - component: {fileID: 613481023011008416}
   - component: {fileID: 1732117122269770167}
   - component: {fileID: 7095487937561686511}
+  - component: {fileID: 8900735062273717989}
+  - component: {fileID: 6096860877571537772}
+  - component: {fileID: 944275653441731049}
   m_Layer: 0
   m_Name: Corn
   m_TagString: Plant
@@ -661,6 +664,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8900735062273717989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047251353979125790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritiveValue: 5
+  growingTime: 10
+  plant: {fileID: 8976352892097889448}
+--- !u!114 &6096860877571537772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047251353979125790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49527c409cad524f8c979ccaf325dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.4
+  target:
+    serializedVersion: 2
+    m_Bits: 8
+  UI_obj: {fileID: 3067130481510243912}
+--- !u!114 &944275653441731049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047251353979125790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838e1622e4f3cc049894d677c7baf1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_timer: {fileID: 3067130482453399067}
+  s_timer: {fileID: 3067130482460613211}
 --- !u!1 &5138319242572288708
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,9 +1010,6 @@ GameObject:
   - component: {fileID: 8999557309663438384}
   - component: {fileID: 8989275599118206076}
   - component: {fileID: 8967435756632950536}
-  - component: {fileID: 5938338698014130570}
-  - component: {fileID: 620066503321148681}
-  - component: {fileID: 3262248374225053436}
   m_Layer: 0
   m_Name: Corn_Plant_grow
   m_TagString: Untagged
@@ -1051,48 +1097,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300012, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
---- !u!114 &5938338698014130570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976352892097889448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nutritiveValue: 5
-  growingTime: 10
---- !u!114 &620066503321148681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976352892097889448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49527c409cad524f8c979ccaf325dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.4
-  target:
-    serializedVersion: 2
-    m_Bits: 8
-  UI_obj: {fileID: 3067130481510243912}
---- !u!114 &3262248374225053436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976352892097889448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838e1622e4f3cc049894d677c7baf1ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  t_timer: {fileID: 3067130482453399067}
-  s_timer: {fileID: 3067130482460613211}
