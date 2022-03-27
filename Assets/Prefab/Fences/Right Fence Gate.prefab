@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2309281859635204293}
   - component: {fileID: 5993295716362263937}
+  - component: {fileID: 6220028815837878124}
+  - component: {fileID: 8531140705180672619}
+  - component: {fileID: 664605761085716539}
+  - component: {fileID: 4638552538053738732}
   m_Layer: 0
   m_Name: Right Fence Gate
   m_TagString: Untagged
@@ -49,6 +53,66 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.5, z: -0.4}
   m_TimeToStationary: 0.5
+--- !u!114 &6220028815837878124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309281859634777317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51171cc52b29c6498c914629bcb1655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.4
+  target:
+    serializedVersion: 2
+    m_Bits: 8
+  UI_obj: {fileID: 5561172175813108496}
+--- !u!114 &8531140705180672619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309281859634777317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600265ba7fc63ae49bd29ec9a1400211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: {fileID: 5561172176527382792}
+  nbPlanks: {fileID: 5561172175367504268}
+  t_currentHP: {fileID: 5561172176953317929}
+  s_currentHP: {fileID: 5561172176436249855}
+--- !u!114 &664605761085716539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309281859634777317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ec6929070d1d40b8aa20df8993b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_HP: 01000000020000000300000004000000
+  nbPlanksToUpgrade: 01000000020000000300000004000000
+--- !u!65 &4638552538053738732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309281859634777317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 1, z: 0.9}
+  m_Center: {x: 0, y: 0.5, z: -0.4}
 --- !u!1 &3678290733881331168
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,10 +124,6 @@ GameObject:
   - component: {fileID: 3678290733881364928}
   - component: {fileID: 3678290733882167776}
   - component: {fileID: 3678290733883265824}
-  - component: {fileID: 9106271185732138786}
-  - component: {fileID: 695814965297055016}
-  - component: {fileID: 3862060254270240553}
-  - component: {fileID: 688358766482772350}
   m_Layer: 0
   m_Name: Right Fence Gate
   m_TagString: Untagged
@@ -134,66 +194,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9106271185732138786
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678290733881331168}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0012655939, y: 0.0095810825, z: 0.008258367}
-  m_Center: {x: -0.00044241062, y: 0.0052381954, z: -0.0040557217}
---- !u!114 &695814965297055016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678290733881331168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51171cc52b29c6498c914629bcb1655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.4
-  target:
-    serializedVersion: 2
-    m_Bits: 8
-  UI_obj: {fileID: 5561172175813108496}
---- !u!114 &3862060254270240553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678290733881331168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 600265ba7fc63ae49bd29ec9a1400211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: {fileID: 5561172176527382792}
-  nbPlanks: {fileID: 5561172175367504268}
-  t_currentHP: {fileID: 5561172176953317929}
-  s_currentHP: {fileID: 5561172176436249855}
---- !u!114 &688358766482772350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678290733881331168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026ec6929070d1d40b8aa20df8993b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  max_HP: 01000000020000000300000004000000
-  nbPlanksToUpgrade: 01000000020000000300000004000000
 --- !u!1001 &8689027483300667129
 PrefabInstance:
   m_ObjectHideFlags: 0

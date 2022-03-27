@@ -46,9 +46,9 @@ public class spawnManager : MonoBehaviour
                 {
                     foreach (GameObject plant in plants)
                     {
-                        if (plant && plant.GetComponentInChildren<plantStatus>().getisTargeted() == false)
+                        if (plant && plant.GetComponent<plantStatus>().getisTargeted() == false)
                         {
-                            plant.GetComponentInChildren<plantStatus>().updateisTargeted(true);
+                            plant.GetComponent<plantStatus>().updateisTargeted(true);
                             int rand = Random.Range(0, spawnPoints.Length - 1);
                             GameObject newZ = Instantiate(zombie, spawnPoints[rand].transform.position, Quaternion.identity);
                             newZ.GetComponent<ennemyStatus>().updateTarget(plant);

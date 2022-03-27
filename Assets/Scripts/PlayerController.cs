@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Tools")]
     [SerializeField] private GameObject m_hammer;
+    [SerializeField] private GameObject m_hammerAttack;
     [SerializeField] private GameObject m_plow;
 
     // Start is called before the first frame update
@@ -107,6 +108,9 @@ public class PlayerController : MonoBehaviour
             // Harvest plants // Water
             if (Input.GetKeyDown(KeyCode.E))
                 Harvest(hitObject);
+
+            if (Input.GetMouseButtonDown(0))
+                StartCoroutine(launchAnimation(3));
         }
     }
 
@@ -122,9 +126,17 @@ public class PlayerController : MonoBehaviour
             angle = (angle + 1) % 4;
 
         angle = isGate ? angle + 4 : angle;
-
-        if(hitObject.GetComponent<TileStatus>().CreateFence(angle))
-            StartCoroutine(launchAnimation(2));
+        
+        if (hitObject.GetComponent<TileStatus>().CreateFence(angle))
+        {
+            if (status.getWood() > 1)
+            {
+                status.updateWood(-1);
+                StartCoroutine(launchAnimation(2));
+            }
+            else
+                hitObject.GetComponent<TileStatus>().DestroyFence(angle);
+        }
 
         else
         {
@@ -190,13 +202,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private IEnumerator launchAnimation(int AnimationNumber)
     {
         m_isWorking = true;
         animationChangeStatus(AnimationNumber);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.5f);
 
         m_isWorking = false;
         animationChangeStatus(AnimationNumber);
@@ -221,7 +232,8 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case 3:
-
+                m_animator.SetBool("Attack", m_isWorking);
+                m_hammerAttack.SetActive(m_isWorking);
                 break;
         }
     }

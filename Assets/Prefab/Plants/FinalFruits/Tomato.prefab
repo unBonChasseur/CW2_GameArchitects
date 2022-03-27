@@ -203,6 +203,9 @@ GameObject:
   - component: {fileID: 8144754912731728288}
   - component: {fileID: 5170548443798107862}
   - component: {fileID: 8654325343867560614}
+  - component: {fileID: 4221342774107028847}
+  - component: {fileID: 7811073131010941597}
+  - component: {fileID: 4328796573719321815}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: Plant
@@ -275,6 +278,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4221342774107028847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2700812954317585656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritiveValue: 3
+  growingTime: 8
+  plant: {fileID: 3030495303104752151}
+--- !u!114 &7811073131010941597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2700812954317585656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49527c409cad524f8c979ccaf325dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.4
+  target:
+    serializedVersion: 2
+    m_Bits: 8
+  UI_obj: {fileID: 7434628115195607775}
+--- !u!114 &4328796573719321815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2700812954317585656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838e1622e4f3cc049894d677c7baf1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_timer: {fileID: 7434628114250277516}
+  s_timer: {fileID: 7434628114262212300}
 --- !u!1 &3030495303104752151
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,9 +336,6 @@ GameObject:
   - component: {fileID: 3060419938108809045}
   - component: {fileID: 3052385627874978565}
   - component: {fileID: 3093596094920919079}
-  - component: {fileID: 2138836183110569871}
-  - component: {fileID: 4986914387524147515}
-  - component: {fileID: 3463316078756509992}
   m_Layer: 0
   m_Name: Tomato_Plant_grow
   m_TagString: Untagged
@@ -377,51 +423,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300010, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
---- !u!114 &2138836183110569871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3030495303104752151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef19c84ea32da244aab219bb2758690, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nutritiveValue: 3
-  growingTime: 8
---- !u!114 &4986914387524147515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3030495303104752151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49527c409cad524f8c979ccaf325dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0.4
-  target:
-    serializedVersion: 2
-    m_Bits: 8
-  UI_obj: {fileID: 7434628115195607775}
---- !u!114 &3463316078756509992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3030495303104752151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838e1622e4f3cc049894d677c7baf1ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  t_timer: {fileID: 7434628114250277516}
-  s_timer: {fileID: 7434628114262212300}
 --- !u!1 &3030495308951061831
 GameObject:
   m_ObjectHideFlags: 0

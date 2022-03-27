@@ -6,6 +6,7 @@ public class plantStatus : MonoBehaviour
 {
     [SerializeField] private float nutritiveValue; 
     [SerializeField] private float growingTime;
+    [SerializeField] private GameObject plant;
     private float currentTime;
 
 
@@ -32,13 +33,13 @@ public class plantStatus : MonoBehaviour
             if (m_isWatered)
             {
                 currentTime -= 2;
-                this.transform.localScale += new Vector3(1, 1, 1) * 2 / (growingTime * 60);
+                plant.transform.localScale += new Vector3(1, 1, 1) * 2 / (growingTime * 60);
             }
 
             else
             {
                 currentTime--;
-                this.transform.localScale += new Vector3(1, 1, 1) * 1 / (growingTime * 60);
+                plant.transform.localScale += new Vector3(1, 1, 1) * 1 / (growingTime * 60);
             }
         }
 

@@ -26,21 +26,16 @@ public class ennemyBehaviour : MonoBehaviour
         m_navMeshAgent = this.GetComponent<NavMeshAgent>();
         status = this.GetComponent<ennemyStatus>();
 
-        m_navMeshAgent.SetDestination(status.getTarget().transform.position);
 
+        m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+        m_animator.SetBool("Walk", true);
     }
 
     void Update()
     {
-        //Go to target position
-        //if (!status.getTarget())
-        //{
-        //    Destroy(gameObject);
-        //}
-
-        if(m_navMeshAgent.velocity.magnitude != 0)
+        if(m_navMeshAgent.velocity.magnitude != 0 && m_velocityIncrease)
         {
-            m_animator.SetBool("Walk", true);
+            //m_animator.SetBool("Walk", true);
             if (m_navMeshAgent.velocity.magnitude > m_lastMagnitude)
                 m_velocityIncrease = true;
 
@@ -50,14 +45,18 @@ public class ennemyBehaviour : MonoBehaviour
             m_lastMagnitude = m_navMeshAgent.velocity.magnitude;
         }
 
-        if (m_navMeshAgent.velocity.magnitude <= 0.2f && !m_velocityIncrease)
+        if (m_navMeshAgent.velocity.magnitude <= 0.2f && !m_navMeshAgent.isStopped && !m_velocityIncrease)
         {
             m_velocityIncrease = true;
             m_navMeshAgent.isStopped = true;
             m_animator.SetBool("Walk", false);
-            
-            float difx = this.transform.position.x - status.getTarget().transform.position.x;
-            float difz = this.transform.position.z - status.getTarget().transform.position.z;
+
+            float difx = 0, difz = 0;
+            if (status.getTarget())
+            {
+                difx = this.transform.position.x - status.getTarget().transform.position.x;
+                difz = this.transform.position.z - status.getTarget().transform.position.z;
+            }
 
             // S'il a atteint son objectif
             if (Mathf.Abs(difx) < .5f && Mathf.Abs(difz) < .5f)
@@ -77,6 +76,12 @@ public class ennemyBehaviour : MonoBehaviour
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
                         }
+                        else
+                        {
+                            m_navMeshAgent.isStopped = false;
+                            m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+                            m_animator.SetBool("Walk", true);
+                        }
                     }
                     else
                     {
@@ -85,6 +90,12 @@ public class ennemyBehaviour : MonoBehaviour
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
                         }
+                        else
+                        {
+                            m_navMeshAgent.isStopped = false;
+                            m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+                            m_animator.SetBool("Walk", true);
+                        }
                     }
                 }
                 else
@@ -92,10 +103,16 @@ public class ennemyBehaviour : MonoBehaviour
                     //Si à droite
                     if (difx >= 0)
                     {
-                        if (Physics.Raycast(transform.position, Vector3.left, out m_hit) && !m_animationRunning && m_hit.distance <.5f)
+                        if (Physics.Raycast(transform.position, Vector3.left, out m_hit) && !m_animationRunning && m_hit.distance < .5f)
                         {
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
+                        }
+                        else
+                        {
+                            m_navMeshAgent.isStopped = false;
+                            m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+                            m_animator.SetBool("Walk", true);
                         }
                     }
                     else
@@ -105,11 +122,20 @@ public class ennemyBehaviour : MonoBehaviour
                             GameObject hitObject = m_hit.transform.gameObject;
                             StartCoroutine(attackFence(hitObject));
                         }
+                        else
+                        {
+                            m_navMeshAgent.isStopped = false;
+                            m_navMeshAgent.SetDestination(status.getTarget().transform.position);
+                            m_animator.SetBool("Walk", true);
+                        }
                     }
                 }
             }
-
         }
+
+        if (!status.getTarget())
+            Destroy(gameObject);
+
     }
 
     private IEnumerator attackFence(GameObject hitObject)
@@ -125,12 +151,15 @@ public class ennemyBehaviour : MonoBehaviour
             if (waitBeforeAttack == 0 && hitObject)
             {
                 StartCoroutine(launchAnimation(1, 1.5f));
-                hitObject.GetComponentInChildren<fenceStatus>().updateCurrentHP(-m_attackDamages);
+                hitObject.GetComponent<fenceStatus>().updateCurrentHP(-m_attackDamages);
                 waitBeforeAttack = m_waitBeforeAttack;
                 yield return new WaitForSeconds(1.5f);
             }
         }
         m_navMeshAgent.isStopped = false;
+        m_velocityIncrease = true;
+        m_animator.SetBool("Walk", true);
+        //transform.position = new Vector3((int)transform.position.x + .5f, transform.position.y, (int)transform.position.z + .5f);
         m_navMeshAgent.SetDestination(status.getTarget().transform.position);
 
     }
@@ -166,4 +195,14 @@ public class ennemyBehaviour : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Hammer")
+        {
+            Debug.Log("Trigger");
+            status.updateHealthPoints(-1);
+        }
+        Debug.Log("non");
+
+    }
 }
