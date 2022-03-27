@@ -202,7 +202,6 @@ public class ennemyBehaviour : MonoBehaviour
             Debug.Log("Trigger");
             status.updateHealthPoints(-1);
         }
-        Debug.Log("non");
 
     }
 }
