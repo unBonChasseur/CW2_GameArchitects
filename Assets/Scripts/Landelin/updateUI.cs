@@ -22,11 +22,13 @@ public class updateUI : MonoBehaviour
     [SerializeField] private GameObject pauseUI;
 
     private bool paused;
+    private bool isDeathUI; 
     void Start()
     {
         status = player.GetComponent<playerStatus>();
         dayManager = time_obj.GetComponent<LightingManager>();
-        paused = false; 
+        paused = false;
+        isDeathUI = false;
         inGameUI.SetActive(true);
         deathUI.SetActive(false);
         pauseUI.SetActive(false);
@@ -52,13 +54,19 @@ public class updateUI : MonoBehaviour
 
     private void playerDeathUI()
     {
-        if (status.getHunger() > 0)
-            return;
-        Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
-        inGameUI.SetActive(false);
-        deathUI.SetActive(true);
-        pauseUI.SetActive(false);
+        if (!status.getPlayerIsDead())
+            return;   
+        else if(isDeathUI == false)
+        {
+            inGameUI.SetActive(false);
+            deathUI.SetActive(true);
+            pauseUI.SetActive(false);
+
+            isDeathUI = true;
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
     }
 
     public void backToMenu()
@@ -73,19 +81,22 @@ public class updateUI : MonoBehaviour
             if (!deathUI.activeInHierarchy)
                 paused = !paused;
         }
-
-        if (paused == false)
+        if (!deathUI.activeInHierarchy)
         {
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            pauseUI.SetActive(false);
+            if (paused == false)
+            {
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+                pauseUI.SetActive(false);
+            }
+            else if (paused == true)
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                pauseUI.SetActive(true);
+            }
         }
-        else if(paused == true)
-        {
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-            pauseUI.SetActive(true);
-        }
+        
     }
 
     public void resume()

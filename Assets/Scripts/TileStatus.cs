@@ -282,6 +282,7 @@ public class TileStatus : MonoBehaviour
         if (!m_instantiatePlant)
         {
             m_instantiatePlant = Instantiate(m_plant[nbPlant]);
+            m_instantiatePlant.GetComponentInChildren<plantStatus>().setTile(this);
             m_instantiatePlant.transform.position = new Vector3((int)transform.position.x + .5f, .95f, (int)transform.position.z + .5f - 1f);
             if (m_waterTime != 0)
                 m_instantiatePlant.GetComponent<plantStatus>().WaterPlant(m_waterTime);
@@ -352,5 +353,12 @@ public class TileStatus : MonoBehaviour
                 GetComponent<Renderer>().material = m_grassMaterial;
             }
         }
+    }
+
+    public void destroyInstancePlant()
+    {
+        Destroy(m_instantiatePlant);
+        m_instantiatePlant = null;
+        StartCoroutine(DirtToGrass());
     }
 }
